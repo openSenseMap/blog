@@ -1,15 +1,24 @@
 ---
+import BlogPost from '../components/BlogPost.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const allPosts = await Astro.glob('../pages/posts/*.md');
+const pageTitle = "Blog"
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>openSenseMap Blog</title>
-	</head>
-	<body>
-		<h1>openSenseMap Blog</h1>
-	</body>
-</html>
+<BaseLayout pageTitle={pageTitle}>
+  <div class="grid grid-cols-2 row-span-full gap-6">
+    {
+      allPosts.map((post) => (
+          <div class="first:col-span-full">
+            <BlogPost
+              url={post.url}
+              title={post.frontmatter.title}
+              imageUrl={post.frontmatter.image.url}
+              author={post.frontmatter.author}
+            />
+          </div>
+        ))
+    }
+  </div>
+</BaseLayout>
