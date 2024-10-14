@@ -1,0 +1,52 @@
+---
+import FormattedDate from "../components/FormattedDate.astro";
+
+interface Props {
+  title: string;
+  image?: string;
+  date: Date;
+  slug: string;
+}
+
+const { title, image, date, slug } = Astro.props;
+---
+
+<a
+  href={`/${slug}`}
+  class="block bg-white rounded-lg shadow-md overflow-hidden transition-all duration-300 ease-in-out transform hover:shadow-xl hover:-translate-y-1"
+>
+  <div class="relative overflow-hidden">
+    <img
+      src={image}
+      alt={title}
+      class="w-full h-48 object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
+    />
+  </div>
+  <div class="p-6">
+    <h2
+      class="text-xl font-bold mb-2 transition-colors duration-300 ease-in-out hover:text-blue-600"
+    >
+      {title}
+    </h2>
+    <div class="flex justify-between items-center">
+      <span
+        class="text-title-green font-medium transition-colors duration-300 ease-in-out hover:text-blue-800 flex items-center"
+      >
+        Read more
+        <svg
+          class="ml-1 h-4 w-4 transition-transform duration-300 ease-in-out"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width={2}
+            d="M9 5l7 7-7 7"></path>
+        </svg>
+      </span>
+      <span class="text-sm text-black"><FormattedDate date={date} /></span>
+    </div>
+  </div>
+</a>
