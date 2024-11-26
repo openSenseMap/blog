@@ -33,6 +33,8 @@ Our new platform includes several new capabilities designed to make _openSenseMa
 
 - **Enhanced Data Visualization for All Devices**: We’ve significantly improved data visualization across the platform to make interpreting sensor data more intuitive and insightful. These enhancements include better support for both stationary and mobile sensors. With the increasing integration of mobile devices, such as those used in projects like [Atrai Bikes](https://atrai.bike), users can easily visualize and interact with data from sensors collecting environmental information on the move.
 
+![Mobile Device](/first-post/mobile-device.png "Mobile device overview")
+
 <br>
 
 ## Future Features in Development
