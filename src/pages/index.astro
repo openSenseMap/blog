@@ -1,54 +1,82 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { getCollection } from 'astro:content';
-import BlogCard from '../components/BlogCard.astro';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getCollection } from "astro:content";
+import BlogCard from "../components/BlogCard.astro";
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+const posts = (await getCollection("blog")).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
 );
 ---
 
 <!doctype html>
 <html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      #wrapper {
+        flex: 1; /* Ensures this grows to fill the remaining space */
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrapper">
+      <Header />
 
-		<div class="relative">
-			<video
-				src="output.mp4"
-				autoplay
-				loop
-				muted
-				class="w-full h-64 md:h-96 object-cover"
-			>
-				Your browser does not support the video tag.
-			</video>
-			<div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-				<div class="text-center">
-					<h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">Welcome to Our Blog</h1>
-					<p class="text-xl text-white">Discover the latest updates and insights</p>
-				</div>
-			</div>
-		</div>
+      <div class="relative">
+        <video
+          src="output.mp4"
+          autoplay
+          loop
+          muted
+          class="w-full h-64 md:h-96 object-cover"
+        >
+          Your browser does not support the video tag.
+        </video>
+        <div
+          class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
+        >
+          <div class="text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-white">
+              Welcome to Our Blog
+            </h1>
+            <p class="text-xl text-white">
+              Discover the latest updates and insights
+            </p>
+          </div>
+        </div>
+      </div>
 
-		<main class="w-full mx-auto px-14 lg:px-8 py-12">
-			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-				{posts.map((post) => (
-				 <BlogCard
-				   title={post.data.title}
-				   image={post.data.heroImage}
-				   date={post.data.pubDate}
-				   slug={post.slug}
-				 />
-				))}
-			</div>
-		</main>
-		<Footer />
-	</body>
+      <main class="w-full mx-auto px-14 lg:px-8 py-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+          {
+            posts.map((post) => (
+              <BlogCard
+                title={post.data.title}
+                image={post.data.heroImage}
+                date={post.data.pubDate}
+                slug={post.slug}
+              />
+            ))
+          }
+        </div>
+      </main>
+      <Footer />
+    </div>
+  </body>
 </html>
